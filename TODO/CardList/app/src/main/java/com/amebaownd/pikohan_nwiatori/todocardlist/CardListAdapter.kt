@@ -10,7 +10,7 @@ import com.amebaownd.pikohan_nwiatori.todocardlist.Data.Event
 
 class CardListAdapter(private val context: Context,
                       private val events:ArrayList<Event>): RecyclerView.Adapter<CardListAdapter.CardListViewHolder>(){
-    val inflater = LayoutInflater.from(context)
+    private val inflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CardListViewHolder {
           val view = inflater.inflate(R.layout.card_layout,parent,false)
           return CardListViewHolder(view)
@@ -18,13 +18,15 @@ class CardListAdapter(private val context: Context,
 
     override fun getItemCount()=events.size
 
-    override fun onBindViewHolder(holder: CardListViewHolder?, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBindViewHolder(viewHolder: CardListViewHolder, position: Int) {
+            viewHolder.title.text = events[position].title
+        viewHolder.date.text = events[position].date.toString()
+        viewHolder.memo.text = events[position].memo
     }
 
     class CardListViewHolder(view:View):RecyclerView.ViewHolder(view){
-        val title = view.findViewById<TextView>(R.id.title)
-        val date = view.findViewById<TextView>(R.id.date)
-        val memo =view.findViewById<TextView>(R.id.memo)
+        val title = view.findViewById<TextView>(R.id.title)!!
+        val date = view.findViewById<TextView>(R.id.date)!!
+        val memo =view.findViewById<TextView>(R.id.memo)!!
     }
 }
